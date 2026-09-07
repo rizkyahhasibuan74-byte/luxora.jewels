@@ -1,895 +1,807 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>LUXORA JEWELS</title>
+    <title>LUXORA JEWELS</title>
 
-  <!-- GOOGLE FONT -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- TAILWIND CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            gold: "#C9A227"
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: "#C9A227",
+            },
+            fontFamily: {
+              luxury: ["Playfair Display", "serif"],
+              sans: ["Poppins", "sans-serif"],
+            },
           },
+        },
+      };
+    </script>
 
-          fontFamily: {
-            luxury: ["Playfair Display", "serif"],
-            sans: ["Poppins", "sans-serif"]
-          }
-        }
+    <!-- CUSTOM CSS -->
+    <style>
+      html {
+        scroll-behavior: smooth;
       }
-    }
-  </script>
 
-  <!-- CUSTOM CSS -->
-  <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #000;
+      }
 
-    html {
-      scroll-behavior: smooth;
-    }
+      /* ANIMASI HOVER PRODUK */
+      .product-card {
+        transition: all 0.4s ease;
+      }
 
-    body {
-      font-family: "Poppins", sans-serif;
-      background: #000;
-    }
+      .product-card:hover {
+        transform: translateY(-10px);
+      }
 
-    /* ANIMASI HOVER PRODUK */
-    .product-card {
-      transition: all 0.4s ease;
-    }
+      .product-card img {
+        transition: transform 0.6s ease;
+      }
 
-    .product-card:hover {
-      transform: translateY(-10px);
-    }
+      .product-card:hover img {
+        transform: scale(1.06);
+      }
 
-    .product-card img {
-      transition: transform 0.6s ease;
-    }
+      /* ANIMASI TESTIMONI */
+      .testimonial-card {
+        transition: all 0.4s ease;
+      }
 
-    .product-card:hover img {
-      transform: scale(1.06);
-    }
+      .testimonial-card:hover {
+        transform: translateY(-10px);
+        border-color: #c9a227;
+      }
 
-    /* ANIMASI TESTIMONI */
-    .testimonial-card {
-      transition: all 0.4s ease;
-    }
+      /* NAVBAR */
+      .navbar-scrolled {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(12px);
+      }
 
-    .testimonial-card:hover {
-      transform: translateY(-10px);
-      border-color: #C9A227;
-    }
+      /* BUTTON */
+      .gold-button {
+        transition: all 0.3s ease;
+      }
 
-    /* NAVBAR */
-    .navbar-scrolled {
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(12px);
-    }
+      .gold-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(201, 162, 39, 0.25);
+      }
+    </style>
+  </head>
 
-    /* BUTTON */
-    .gold-button {
-      transition: all 0.3s ease;
-    }
-
-    .gold-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(201, 162, 39, 0.25);
-    }
-
-  </style>
-</head>
-
-
-<body class="bg-black text-white font-sans">
-
-
-<!-- =====================================================
+  <body class="bg-black text-white font-sans">
+    <!-- =====================================================
      1. NAVBAR
 ===================================================== -->
+    <nav
+      id="navbar"
+      class="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-md border-b border-white/10 transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- LOGO -->
+          <a
+            href="#home"
+            class="font-luxury text-2xl md:text-3xl font-bold text-gold"
+          >
+            LUXORA JEWELS
+          </a>
 
-<nav id="navbar"
-     class="fixed top-0 left-0 w-full z-50
-            bg-black/60 backdrop-blur-md
-            border-b border-white/10
-            transition-all duration-300">
+          <!-- MENU DESKTOP -->
+          <div class="hidden md:flex items-center gap-8">
+            <a href="#home" class="hover:text-gold transition">Home</a>
+            <a href="#produk" class="hover:text-gold transition">Produk</a>
+            <a href="#about" class="hover:text-gold transition">About</a>
+            <a href="#testimoni" class="hover:text-gold transition"
+              >Testimoni</a
+            >
+            <a href="#contact" class="hover:text-gold transition">Contact</a>
+          </div>
 
-  <div class="max-w-7xl mx-auto px-6 py-4">
+          <!-- MOBILE BUTTON -->
+          <button
+            id="menuButton"
+            class="md:hidden text-gold text-2xl focus:outline-none"
+          >
+            ☰
+          </button>
+        </div>
 
-    <div class="flex items-center justify-between">
-
-      <!-- LOGO -->
-      <a href="#home"
-         class="font-luxury text-2xl md:text-3xl
-                font-bold text-gold">
-        LUXORA JEWELS
-      </a>
-
-
-      <!-- MENU DESKTOP -->
-      <div class="hidden md:flex items-center gap-8">
-
-        <a href="#home"
-           class="hover:text-gold transition">
-          Home
-        </a>
-
-        <a href="#produk"
-           class="hover:text-gold transition">
-          Produk
-        </a>
-
-        <a href="#testimoni"
-           class="hover:text-gold transition">
-          Testimoni
-        </a>
-
-        <a href="#about"
-           class="hover:text-gold transition">
-          About
-        </a>
-
-        <a href="#contact"
-           class="hover:text-gold transition">
-          Contact
-        </a>
-
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="hidden md:hidden pt-5 pb-3">
+          <div class="flex flex-col gap-4">
+            <a href="#home" class="mobile-link hover:text-gold">Home</a>
+            <a href="#produk" class="mobile-link hover:text-gold">Produk</a>
+            <a href="#about" class="mobile-link hover:text-gold">About</a>
+            <a href="#testimoni" class="mobile-link hover:text-gold"
+              >Testimoni</a
+            >
+            <a href="#contact" class="mobile-link hover:text-gold">Contact</a>
+          </div>
+        </div>
       </div>
+    </nav>
 
-
-      <!-- MOBILE BUTTON -->
-      <button id="menuButton"
-              class="md:hidden text-gold text-2xl">
-        ☰
-      </button>
-
-    </div>
-
-
-    <!-- MOBILE MENU -->
-    <div id="mobileMenu"
-         class="hidden md:hidden pt-5 pb-3">
-
-      <div class="flex flex-col gap-4">
-
-        <a href="#home"
-           class="mobile-link hover:text-gold">
-          Home
-        </a>
-
-        <a href="#produk"
-           class="mobile-link hover:text-gold">
-          Produk
-        </a>
-
-        <a href="#testimoni"
-           class="mobile-link hover:text-gold">
-          Testimoni
-        </a>
-
-        <a href="#about"
-           class="mobile-link hover:text-gold">
-          About
-        </a>
-
-        <a href="#contact"
-           class="mobile-link hover:text-gold">
-          Contact
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-</nav>
-
-
-
-<!-- =====================================================
+    <!-- =====================================================
      2. HERO
 ===================================================== -->
+    <section
+      id="home"
+      class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <!-- BACKGROUND IMAGE -->
+      <img
+        src="https://images.unsplash.com/photo-1739194840257-0035eaafc61e?auto=format&fit=crop&w=1800&q=85"
+        alt="Luxury Jewelry"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
 
-<section id="home"
-         class="relative min-h-screen flex items-center
-                justify-center overflow-hidden">
+      <!-- OVERLAY -->
+      <div class="absolute inset-0 bg-black/65"></div>
 
-  <!-- BACKGROUND IMAGE -->
-  <img
-    src="https://images.unsplash.com/photo-1739194840257-0035eaafc61e?auto=format&fit=crop&w=1800&q=85"
-    alt="Luxury Jewelry"
-    class="absolute inset-0 w-full h-full object-cover"
-  >
+      <!-- HERO CONTENT -->
+      <div class="relative z-10 text-center max-w-4xl mx-auto px-6 pt-20">
+        <p class="text-gold uppercase tracking-[0.4em] text-sm mb-5">
+          LUXORA JEWELS
+        </p>
 
-  <!-- OVERLAY -->
-  <div class="absolute inset-0 bg-black/65"></div>
+        <h1
+          class="font-luxury text-5xl md:text-7xl font-bold leading-tight mb-6"
+        >
+          Keindahan yang <span class="text-gold">Tak Terlupakan</span>
+        </h1>
 
+        <p class="text-gray-300 text-base md:text-lg max-w-2xl mx-auto mb-10">
+          Temukan koleksi perhiasan elegan yang dirancang untuk membuat setiap
+          momen menjadi lebih istimewa.
+        </p>
 
-  <!-- HERO CONTENT -->
-  <div class="relative z-10 text-center
-              max-w-4xl mx-auto px-6 pt-20">
+        <!-- BUTTON -->
+        <a
+          href="#produk"
+          class="gold-button inline-block bg-gold text-black px-8 py-4 rounded-full font-semibold"
+        >
+          Lihat Koleksi
+        </a>
+      </div>
+    </section>
 
-    <p class="text-gold uppercase
-              tracking-[0.4em] text-sm mb-5">
-      LUXORA JEWELS
-    </p>
-
-    <h1 class="font-luxury
-               text-5xl md:text-7xl
-               font-bold leading-tight mb-6">
-
-      Keindahan yang
-      <span class="text-gold">
-        Tak Terlupakan
-      </span>
-
-    </h1>
-
-    <p class="text-gray-300
-              text-base md:text-lg
-              max-w-2xl mx-auto mb-10">
-
-      Temukan koleksi perhiasan elegan yang
-      dirancang untuk membuat setiap momen
-      menjadi lebih istimewa.
-
-    </p>
-
-
-    <!-- BUTTON -->
-    <a href="#produk"
-       class="gold-button inline-block
-              bg-gold text-black
-              px-8 py-4 rounded-full
-              font-semibold">
-
-      Lihat Koleksi
-
-    </a>
-
-  </div>
-
-</section>
-
-
-
-<!-- =====================================================
+    <!-- =====================================================
      3. PRODUK
 ===================================================== -->
-
-<section id="produk"
-         class="py-24 bg-zinc-950">
-
-  <div class="max-w-7xl mx-auto px-6">
-
-
-    <!-- TITLE -->
-    <div class="text-center mb-14">
-
-      <p class="text-gold uppercase
-                tracking-[0.3em] text-sm mb-3">
-        Koleksi Kami
-      </p>
-
-      <h2 class="font-luxury
-                 text-4xl md:text-5xl
-                 font-bold mb-5">
-
-        Koleksi Perhiasan
-
-      </h2>
-
-      <p class="text-gray-400 max-w-2xl mx-auto">
-
-        Pilihan perhiasan elegan untuk
-        melengkapi gaya dan momen spesial Anda.
-
-      </p>
-
-    </div>
-
-
-
-    <!-- PRODUCT GRID -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-
-      <!-- PRODUK 1 -->
-      <div class="product-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl overflow-hidden">
-
-        <div class="h-80 overflow-hidden">
-
-          <img
-            src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=85"
-            alt="Aurelia Ring"
-            class="w-full h-full object-cover"
-          >
-
+    <section id="produk" class="py-24 bg-zinc-950">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- TITLE -->
+        <div class="text-center mb-14">
+          <p class="text-gold uppercase tracking-[0.3em] text-sm mb-3">
+            Koleksi Kami
+          </p>
+          <h2 class="font-luxury text-4xl md:text-5xl font-bold mb-5">
+            Koleksi Perhiasan
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Pilihan perhiasan elegan untuk melengkapi gaya dan momen spesial
+            Anda.
+          </p>
         </div>
 
-        <div class="p-6">
-
-          <p class="text-gold text-sm mb-2">
-            RING
-          </p>
-
-          <h3 class="font-luxury text-2xl mb-3">
-            Aurelia Ring
-          </h3>
-
-          <p class="text-gray-400 text-sm mb-5">
-            Cincin elegan dengan desain mewah
-            untuk penampilan istimewa.
-          </p>
-
-          <div class="flex items-center
-                      justify-between gap-4">
-
-            <span class="text-gold font-semibold">
-              Rp 2.500.000
-            </span>
-
-            <a
-              href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Aurelia%20Ring%20di%20LUXORA%20JEWELS"
-              target="_blank"
-              class="bg-gold text-black
-                     px-4 py-2 rounded-full
-                     text-sm font-semibold
-                     hover:bg-yellow-500
-                     transition">
-
-              Beli Sekarang
-
-            </a>
-
+        <!-- PRODUCT GRID -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- PRODUK 1 -->
+          <div
+            class="product-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden"
+          >
+            <div class="h-80 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=85"
+                alt="Aurelia Ring"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <p class="text-gold text-sm mb-2">RING</p>
+              <h3 class="font-luxury text-2xl mb-3">Aurelia Ring</h3>
+              <p class="text-gray-400 text-sm mb-5">
+                Cincin elegan dengan desain mewah untuk penampilan istimewa.
+              </p>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-gold font-semibold">Rp 2.500.000</span>
+                <a
+                  href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Aurelia%20Ring%20di%20LUXORA%20JEWELS"
+                  target="_blank"
+                  class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition"
+                  >Beli Sekarang</a
+                >
+              </div>
+            </div>
           </div>
 
-        </div>
-      </div>
-
-
-
-      <!-- PRODUK 2 -->
-      <div class="product-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl overflow-hidden">
-
-        <div class="h-80 overflow-hidden">
-
-          <img
-            src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85"
-            alt="Celestia Necklace"
-            class="w-full h-full object-cover"
+          <!-- PRODUK 2 -->
+          <div
+            class="product-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden"
           >
-
-        </div>
-
-        <div class="p-6">
-
-          <p class="text-gold text-sm mb-2">
-            NECKLACE
-          </p>
-
-          <h3 class="font-luxury text-2xl mb-3">
-            Celestia Necklace
-          </h3>
-
-          <p class="text-gray-400 text-sm mb-5">
-            Kalung elegan yang memberikan
-            kesan anggun dan berkelas.
-          </p>
-
-          <div class="flex items-center
-                      justify-between gap-4">
-
-            <span class="text-gold font-semibold">
-              Rp 3.200.000
-            </span>
-
-            <a
-              href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Celestia%20Necklace%20di%20LUXORA%20JEWELS"
-              target="_blank"
-              class="bg-gold text-black
-                     px-4 py-2 rounded-full
-                     text-sm font-semibold
-                     hover:bg-yellow-500
-                     transition">
-
-              Beli Sekarang
-
-            </a>
-
+            <div class="h-80 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85"
+                alt="Celestia Necklace"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <p class="text-gold text-sm mb-2">NECKLACE</p>
+              <h3 class="font-luxury text-2xl mb-3">Celestia Necklace</h3>
+              <p class="text-gray-400 text-sm mb-5">
+                Kalung elegan yang memberikan kesan anggun dan berkelas.
+              </p>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-gold font-semibold">Rp 3.200.000</span>
+                <a
+                  href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Celestia%20Necklace%20di%20LUXORA%20JEWELS"
+                  target="_blank"
+                  class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition"
+                  >Beli Sekarang</a
+                >
+              </div>
+            </div>
           </div>
 
-        </div>
-      </div>
-
-
-
-      <!-- PRODUK 3 -->
-      <div class="product-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl overflow-hidden">
-
-        <div class="h-80 overflow-hidden">
-
-          <img
-            src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=85"
-            alt="Elara Bracelet"
-            class="w-full h-full object-cover"
+          <!-- PRODUK 3 -->
+          <div
+            class="product-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden"
           >
-
-        </div>
-
-        <div class="p-6">
-
-          <p class="text-gold text-sm mb-2">
-            BRACELET
-          </p>
-
-          <h3 class="font-luxury text-2xl mb-3">
-            Elara Bracelet
-          </h3>
-
-          <p class="text-gray-400 text-sm mb-5">
-            Gelang minimalis dengan sentuhan
-            elegan untuk berbagai kesempatan.
-          </p>
-
-          <div class="flex items-center
-                      justify-between gap-4">
-
-            <span class="text-gold font-semibold">
-              Rp 1.850.000
-            </span>
-
-            <a
-              href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Elara%20Bracelet%20di%20LUXORA%20JEWELS"
-              target="_blank"
-              class="bg-gold text-black
-                     px-4 py-2 rounded-full
-                     text-sm font-semibold
-                     hover:bg-yellow-500
-                     transition">
-
-              Beli Sekarang
-
-            </a>
-
+            <div class="h-80 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=85"
+                alt="Elara Bracelet"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <p class="text-gold text-sm mb-2">BRACELET</p>
+              <h3 class="font-luxury text-2xl mb-3">Elara Bracelet</h3>
+              <p class="text-gray-400 text-sm mb-5">
+                Gelang minimalis dengan sentuhan elegan untuk berbagai
+                kesempatan.
+              </p>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-gold font-semibold">Rp 1.850.000</span>
+                <a
+                  href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Elara%20Bracelet%20di%20LUXORA%20JEWELS"
+                  target="_blank"
+                  class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition"
+                  >Beli Sekarang</a
+                >
+              </div>
+            </div>
           </div>
 
-        </div>
-      </div>
-
-
-
-      <!-- PRODUK 4 -->
-      <div class="product-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl overflow-hidden">
-
-        <div class="h-80 overflow-hidden">
-
-          <img
-            src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=900&q=85"
-            alt="Aurora Earrings"
-            class="w-full h-full object-cover"
+          <!-- PRODUK 4 -->
+          <div
+            class="product-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden"
           >
-
-        </div>
-
-        <div class="p-6">
-
-          <p class="text-gold text-sm mb-2">
-            EARRINGS
-          </p>
-
-          <h3 class="font-luxury text-2xl mb-3">
-            Aurora Earrings
-          </h3>
-
-          <p class="text-gray-400 text-sm mb-5">
-            Anting elegan dengan desain modern
-            yang cocok untuk acara spesial.
-          </p>
-
-          <div class="flex items-center
-                      justify-between gap-4">
-
-            <span class="text-gold font-semibold">
-              Rp 1.250.000
-            </span>
-
-            <a
-              href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Aurora%20Earrings%20di%20LUXORA%20JEWELS"
-              target="_blank"
-              class="bg-gold text-black
-                     px-4 py-2 rounded-full
-                     text-sm font-semibold
-                     hover:bg-yellow-500
-                     transition">
-
-              Beli Sekarang
-
-            </a>
-
+            <div class="h-80 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=900&q=85"
+                alt="Aurora Earrings"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <p class="text-gold text-sm mb-2">EARRINGS</p>
+              <h3 class="font-luxury text-2xl mb-3">Aurora Earrings</h3>
+              <p class="text-gray-400 text-sm mb-5">
+                Anting elegan dengan desain modern yang cocok untuk acara
+                spesial.
+              </p>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-gold font-semibold">Rp 1.250.000</span>
+                <a
+                  href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Aurora%20Earrings%20di%20LUXORA%20JEWELS"
+                  target="_blank"
+                  class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition"
+                  >Beli Sekarang</a
+                >
+              </div>
+            </div>
           </div>
 
-        </div>
-      </div>
-
-
-
-      <!-- PRODUK 5 -->
-      <div class="product-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl overflow-hidden">
-
-        <div class="h-80 overflow-hidden">
-
-          <img
-            src="https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?auto=format&fit=crop&w=900&q=85"
-            alt="Elara Necklace"
-            class="w-full h-full object-cover"
+          <!-- PRODUK 5 -->
+          <div
+            class="product-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden"
           >
-
-        </div>
-
-        <div class="p-6">
-
-          <p class="text-gold text-sm mb-2">
-            NECKLACE
-          </p>
-
-          <h3 class="font-luxury text-2xl mb-3">
-            Elara Necklace
-          </h3>
-
-          <p class="text-gray-400 text-sm mb-5">
-            Kalung cantik dengan tampilan
-            sederhana namun tetap mewah.
-          </p>
-
-          <div class="flex items-center
-                      justify-between gap-4">
-
-            <span class="text-gold font-semibold">
-              Rp 2.750.000
-            </span>
-
-            <a
-              href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Elara%20Necklace%20di%20LUXORA%20JEWELS"
-              target="_blank"
-              class="bg-gold text-black
-                     px-4 py-2 rounded-full
-                     text-sm font-semibold
-                     hover:bg-yellow-500
-                     transition">
-
-              Beli Sekarang
-
-            </a>
-
+            <div class="h-80 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?auto=format&fit=crop&w=900&q=85"
+                alt="Elara Necklace"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <p class="text-gold text-sm mb-2">NECKLACE</p>
+              <h3 class="font-luxury text-2xl mb-3">Elara Necklace</h3>
+              <p class="text-gray-400 text-sm mb-5">
+                Kalung cantik dengan tampilan sederhana namun tetap mewah.
+              </p>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-gold font-semibold">Rp 2.750.000</span>
+                <a
+                  href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Elara%20Necklace%20di%20LUXORA%20JEWELS"
+                  target="_blank"
+                  class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition"
+                  >Beli Sekarang</a
+                >
+              </div>
+            </div>
           </div>
 
-        </div>
-      </div>
-
-
-
-      <!-- PRODUK 6 -->
-      <div class="product-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl overflow-hidden">
-
-        <div class="h-80 overflow-hidden">
-
-          <img
-            src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=85"
-            alt="Isabella Gold Ring"
-            class="w-full h-full object-cover"
+          <!-- PRODUK 6 -->
+          <div
+            class="product-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden"
           >
-
-        </div>
-
-        <div class="p-6">
-
-          <p class="text-gold text-sm mb-2">
-            RING
-          </p>
-
-          <h3 class="font-luxury text-2xl mb-3">
-            Isabella Gold Ring
-          </h3>
-
-          <p class="text-gray-400 text-sm mb-5">
-            Cincin klasik dengan nuansa
-            mewah dan timeless.
-          </p>
-
-          <div class="flex items-center
-                      justify-between gap-4">
-
-            <span class="text-gold font-semibold">
-              Rp 2.950.000
-            </span>
-
-            <a
-              href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Isabella%20Gold%20Ring%20di%20LUXORA%20JEWELS"
-              target="_blank"
-              class="bg-gold text-black
-                     px-4 py-2 rounded-full
-                     text-sm font-semibold
-                     hover:bg-yellow-500
-                     transition">
-
-              Beli Sekarang
-
-            </a>
-
+            <div class="h-80 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=85"
+                alt="Isabella Gold Ring"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <p class="text-gold text-sm mb-2">RING</p>
+              <h3 class="font-luxury text-2xl mb-3">Isabella Gold Ring</h3>
+              <p class="text-gray-400 text-sm mb-5">
+                Cincin klasik dengan nuansa mewah dan timeless.
+              </p>
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-gold font-semibold">Rp 2.950.000</span>
+                <a
+                  href="https://wa.me/6281263516919?text=Halo%20saya%20ingin%20membeli%20Isabella%20Gold%20Ring%20di%20LUXORA%20JEWELS"
+                  target="_blank"
+                  class="bg-gold text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition"
+                  >Beli Sekarang</a
+                >
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
+    </section>
 
-    </div>
-
-  </div>
-</section>
-
-
-
-<!-- =====================================================
-     4. TESTIMONI
+    <!-- =====================================================
+     4. ABOUT
 ===================================================== -->
-
-<section id="testimoni"
-         class="py-24 bg-black">
-
-  <div class="max-w-7xl mx-auto px-6">
-
-
-    <!-- TITLE -->
-    <div class="text-center mb-14">
-
-      <p class="text-gold uppercase
-                tracking-[0.3em] text-sm mb-3">
-        Testimoni
-      </p>
-
-      <h2 class="font-luxury
-                 text-4xl md:text-5xl
-                 font-bold mb-5">
-
-        Apa Kata Pelanggan Kami?
-
-      </h2>
-
-      <p class="text-gray-400 max-w-2xl mx-auto">
-
-        Pengalaman pelanggan menjadi bagian penting
-        dari perjalanan LUXORA JEWELS.
-
-      </p>
-
-    </div>
-
-
-
-    <!-- TESTIMONI GRID -->
-    <div class="grid md:grid-cols-3 gap-8">
-
-
-      <!-- TESTIMONI 1 -->
-      <div class="testimonial-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl p-8">
-
-        <div class="text-gold text-2xl mb-5">
-          ★★★★★
+    <section id="about" class="py-24 bg-black">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- TITLE -->
+        <div class="text-center mb-14">
+          <p class="text-gold uppercase tracking-[0.3em] text-sm mb-3">
+            Tentang Kami
+          </p>
+          <h2 class="font-luxury text-4xl md:text-5xl font-bold mb-5">
+            Tentang LUXORA JEWELS
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Mengenal lebih dekat LUXORA JEWELS, tempat di mana keindahan dan
+            keanggunan bertemu.
+          </p>
         </div>
 
-        <p class="text-gray-300
-                  leading-relaxed mb-7">
-
-          “Cincinnya sangat cantik dan terlihat
-          elegan ketika dipakai. Desainnya juga
-          sesuai dengan yang saya harapkan.”
-
-        </p>
-
-        <div class="flex items-center gap-4">
-
-          <div class="w-12 h-12 rounded-full
-                      bg-gold
-                      flex items-center justify-center
-                      text-black font-bold">
-
-            A
-
+        <!-- ABOUT CONTENT -->
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- IMAGE -->
+          <div class="overflow-hidden rounded-3xl border border-zinc-800">
+            <img
+              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=85"
+              alt="LUXORA JEWELS"
+              class="w-full h-[450px] object-cover hover:scale-105 transition duration-700"
+            />
           </div>
 
+          <!-- TEXT -->
           <div>
-
-            <h3 class="font-semibold">
-              Aulia
+            <p class="text-gold uppercase tracking-[0.25em] text-sm mb-4">
+              Luxury & Elegance
+            </p>
+            <h3 class="font-luxury text-3xl md:text-4xl font-bold mb-6">
+              Keindahan yang <span class="text-gold">Berarti</span>
             </h3>
-
-            <p class="text-sm text-gray-500">
-              Pelanggan LUXORA JEWELS
+            <p class="text-gray-400 leading-relaxed mb-5">
+              LUXORA JEWELS adalah brand perhiasan yang menghadirkan berbagai
+              koleksi elegan dan berkualitas untuk menemani setiap momen
+              istimewa Anda.
+            </p>
+            <p class="text-gray-400 leading-relaxed mb-8">
+              Kami percaya bahwa setiap perhiasan memiliki cerita. Karena itu,
+              setiap koleksi LUXORA JEWELS dirancang dengan perhatian terhadap
+              detail, keindahan, dan gaya yang timeless.
             </p>
 
+            <!-- FEATURES -->
+            <div class="grid sm:grid-cols-3 gap-5">
+              <div class="border border-zinc-800 rounded-2xl p-5 bg-zinc-950">
+                <div class="text-gold text-2xl mb-3">✦</div>
+                <h4 class="font-semibold mb-2">Elegan</h4>
+                <p class="text-gray-500 text-sm">Desain elegan dan berkelas.</p>
+              </div>
+
+              <div class="border border-zinc-800 rounded-2xl p-5 bg-zinc-950">
+                <div class="text-gold text-2xl mb-3">◆</div>
+                <h4 class="font-semibold mb-2">Berkualitas</h4>
+                <p class="text-gray-500 text-sm">
+                  Mengutamakan kualitas produk.
+                </p>
+              </div>
+
+              <div class="border border-zinc-800 rounded-2xl p-5 bg-zinc-950">
+                <div class="text-gold text-2xl mb-3">★</div>
+                <h4 class="font-semibold mb-2">Terpercaya</h4>
+                <p class="text-gray-500 text-sm">
+                  Kepuasan pelanggan adalah prioritas.
+                </p>
+              </div>
+            </div>
           </div>
-
         </div>
-
       </div>
+    </section>
 
-
-
-      <!-- TESTIMONI 2 -->
-      <div class="testimonial-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl p-8">
-
-        <div class="text-gold text-2xl mb-5">
-          ★★★★★
-        </div>
-
-        <p class="text-gray-300
-                  leading-relaxed mb-7">
-
-          “Kalungnya terlihat sangat mewah.
-          Saya suka sekali dengan detail dan
-          tampilannya. Sangat cocok untuk
-          acara spesial.”
-
-        </p>
-
-        <div class="flex items-center gap-4">
-
-          <div class="w-12 h-12 rounded-full
-                      bg-gold
-                      flex items-center justify-center
-                      text-black font-bold">
-
-            S
-
-          </div>
-
-          <div>
-
-            <h3 class="font-semibold">
-              Salsabila
-            </h3>
-
-            <p class="text-sm text-gray-500">
-              Pelanggan LUXORA JEWELS
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- TESTIMONI 3 -->
-      <div class="testimonial-card
-                  bg-zinc-900
-                  border border-zinc-800
-                  rounded-2xl p-8">
-
-        <div class="text-gold text-2xl mb-5">
-          ★★★★★
-        </div>
-
-        <p class="text-gray-300
-                  leading-relaxed mb-7">
-
-          “Saya sangat puas dengan produknya.
-          Tampilannya elegan, cocok dipakai
-          sendiri maupun untuk hadiah.”
-
-        </p>
-
-        <div class="flex items-center gap-4">
-
-          <div class="w-12 h-12 rounded-full
-                      bg-gold
-                      flex items-center justify-center
-                      text-black font-bold">
-
-            P
-
-          </div>
-
-          <div>
-
-            <h3 class="font-semibold">
-              Putri
-            </h3>
-
-            <p class="text-sm text-gray-500">
-              Pelanggan LUXORA JEWELS
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-
-<!-- =====================================================
-     5. SPECIAL OFFER
+    <!-- =====================================================
+     5. TESTIMONI
 ===================================================== -->
+    <section id="testimoni" class="py-24 bg-zinc-950">
+      <div class="max-w-7xl mx-auto px-6">
+        <!-- TITLE -->
+        <div class="text-center mb-14">
+          <p class="text-gold uppercase tracking-[0.3em] text-sm mb-3">
+            Testimoni
+          </p>
+          <h2 class="font-luxury text-4xl md:text-5xl font-bold mb-5">
+            Apa Kata Pelanggan Kami?
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Pengalaman pelanggan menjadi bagian penting dari perjalanan LUXORA
+            JEWELS.
+          </p>
+        </div>
 
-<section id="offer"
-         class="py-24 bg-zinc-950">
+        <!-- TESTIMONI GRID -->
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="testimonial-card bg-zinc-900 border border-zinc-800 rounded-2xl p-8"
+          >
+            <div class="text-gold text-2xl mb-5">★★★★★</div>
+            <p class="text-gray-300 leading-relaxed mb-7">
+              “Cincinnya sangat cantik dan terlihat elegan ketika dipakai.
+              Desainnya juga sesuai dengan yang saya harapkan.”
+            </p>
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-black font-bold"
+              >
+                A
+              </div>
+              <div>
+                <h3 class="font-semibold">Aulia</h3>
+                <p class="text-sm text-gray-500">Pelanggan LUXORA JEWELS</p>
+              </div>
+            </div>
+          </div>
 
-  <div class="max-w-5xl mx-auto px-6">
+          <div
+            class="testimonial-card bg-zinc-900 border border-zinc-800 rounded-2xl p-8"
+          >
+            <div class="text-gold text-2xl mb-5">★★★★★</div>
+            <p class="text-gray-300 leading-relaxed mb-7">
+              “Kalungnya terlihat sangat mewah. Saya suka sekali dengan detail
+              dan tampilannya. Sangat cocok untuk acara spesial.”
+            </p>
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-black font-bold"
+              >
+                S
+              </div>
+              <div>
+                <h3 class="font-semibold">Salsabila</h3>
+                <p class="text-sm text-gray-500">Pelanggan LUXORA JEWELS</p>
+              </div>
+            </div>
+          </div>
 
-    <div class="relative overflow-hidden
-                rounded-3xl
-                border border-gold/30
-                bg-zinc-900
-                p-10 md:p-16
-                text-center">
+          <div
+            class="testimonial-card bg-zinc-900 border border-zinc-800 rounded-2xl p-8"
+          >
+            <div class="text-gold text-2xl mb-5">★★★★★</div>
+            <p class="text-gray-300 leading-relaxed mb-7">
+              “Saya sangat puas dengan produknya. Tampilannya elegan, cocok
+              dipakai sendiri maupun untuk hadiah.”
+            </p>
+            <div class="flex items-center gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-black font-bold"
+              >
+                P
+              </div>
+              <div>
+                <h3 class="font-semibold">Putri</h3>
+                <p class="text-sm text-gray-500">Pelanggan LUXORA JEWELS</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <p class="text-gold uppercase
-                tracking-[0.3em] text-sm mb-4">
-        Special Offer
-      </p>
+    <!-- =====================================================
+     6. SPECIAL OFFER
+===================================================== -->
+    <section id="offer" class="py-24 bg-black">
+      <div class="max-w-5xl mx-auto px-6">
+        <div
+          class="relative overflow-hidden rounded-3xl border border-gold/30 bg-zinc-900 p-10 md:p-16 text-center"
+        >
+          <p class="text-gold uppercase tracking-[0.3em] text-sm mb-4">
+            Special Offer
+          </p>
+          <h2 class="font-luxury text-4xl md:text-5xl font-bold mb-5">
+            Hadiah Istimewa Untuk Anda
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+            Temukan perhiasan pilihan dan jadikan setiap momen lebih berkesan
+            bersama LUXORA JEWELS.
+          </p>
+          <a
+            href="https://wa.me/6281263516919?text=Halo%20LUXORA%20JEWELS%2C%20saya%20tertarik%20dengan%20penawaran%20spesial"
+            target="_blank"
+            class="gold-button inline-block bg-gold text-black px-8 py-4 rounded-full font-semibold"
+          >
+            Dapatkan Penawaran
+          </a>
+        </div>
+      </div>
+    </section>
 
-      <h2 class="font-luxury
-                 text-4xl md:text-5xl
-                 font-bold mb-5">
+    <!-- =====================================================
+     7. CONTACT
+===================================================== -->
+    <section id="contact" class="relative py-24 bg-zinc-950 overflow-hidden">
+      <div class="relative max-w-7xl mx-auto px-6">
+        <!-- CONTACT HEADER -->
+        <div class="text-center mb-16">
+          <p class="text-gold uppercase tracking-[0.5em] text-sm mb-5">
+            Hubungi Kami
+          </p>
+          <h2 class="font-luxury text-5xl md:text-7xl font-bold mb-5">
+            CONTACT
+          </h2>
 
-        Hadiah Istimewa Untuk Anda
+          <!-- GOLD LINE + DIAMOND -->
+          <div class="flex items-center justify-center gap-4 mb-6">
+            <div class="w-20 h-px bg-gold"></div>
+            <span class="text-gold text-2xl">◆</span>
+            <div class="w-20 h-px bg-gold"></div>
+          </div>
 
-      </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Kami selalu siap membantu Anda. Hubungi kami untuk informasi produk,
+            pemesanan, atau pertanyaan lainnya.
+          </p>
+        </div>
 
-      <p class="text-gray-400
-                max-w-2xl mx-auto mb-8">
+        <!-- CONTACT CARDS -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <!-- WHATSAPP -->
+          <a
+            href="https://wa.me/6281263516919"
+            target="_blank"
+            class="group bg-zinc-900 border border-zinc-800 hover:border-gold rounded-2xl p-7 text-center transition duration-500 hover:-translate-y-2"
+          >
+            <div
+              class="mx-auto mb-5 w-20 h-20 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold transition duration-500"
+            >
+              <span class="text-gold group-hover:text-black text-3xl transition"
+                >☎</span
+              >
+            </div>
+            <p class="text-gold uppercase tracking-widest text-sm mb-3">
+              WhatsApp
+            </p>
+            <p class="text-gray-400 text-sm mb-5">Chat langsung dengan kami</p>
+            <div
+              class="border border-zinc-700 group-hover:border-gold rounded-lg py-3 transition"
+            >
+              <p class="text-white text-sm">0812-6351-6919</p>
+            </div>
+          </a>
 
-        Temukan perhiasan pilihan dan
-        jadikan setiap momen lebih berkesan
-        bersama LUXORA JEWELS.
+          <!-- EMAIL -->
+          <a
+            href="mailto:luxorajewels@gmail.com"
+            class="group bg-zinc-900 border border-zinc-800 hover:border-gold rounded-2xl p-7 text-center transition duration-500 hover:-translate-y-2"
+          >
+            <div
+              class="mx-auto mb-5 w-20 h-20 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold transition duration-500"
+            >
+              <span class="text-gold group-hover:text-black text-3xl transition"
+                >✉</span
+              >
+            </div>
+            <p class="text-gold uppercase tracking-widest text-sm mb-3">
+              Email
+            </p>
+            <p class="text-gray-400 text-sm mb-5">Kirim email kepada kami</p>
+            <div
+              class="border border-zinc-700 group-hover:border-gold rounded-lg py-3 transition"
+            >
+              <p class="text-white text-sm">luxorajewels@gmail.com</p>
+            </div>
+          </a>
 
-      </p>
+          <!-- ALAMAT -->
+          <div
+            class="group bg-zinc-900 border border-zinc-800 hover:border-gold rounded-2xl p-7 text-center transition duration-500 hover:-translate-y-2"
+          >
+            <div
+              class="mx-auto mb-5 w-20 h-20 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold transition duration-500"
+            >
+              <span class="text-gold group-hover:text-black text-3xl transition"
+                >📍</span
+              >
+            </div>
+            <p class="text-gold uppercase tracking-widest text-sm mb-3">
+              Alamat
+            </p>
+            <p class="text-gray-400 text-sm mb-5">Kunjungi toko kami</p>
+            <div
+              class="border border-zinc-700 group-hover:border-gold rounded-lg py-3 transition"
+            >
+              <p class="text-white text-sm">Medan, Sumatera Utara</p>
+            </div>
+          </div>
 
-      <a
-        href="https://wa.me/6281263516919?text=Halo%20LUXORA%20JEWELS%2C%20saya%20tertarik%20dengan%20penawaran%20spesial"
-        target="_blank"
-        class="gold-button inline-block
-               bg-gold text-black
-               px-8 py-4
-               rounded-full
+          <!-- JAM OPERASIONAL -->
+          <div
+            class="group bg-zinc-900 border border-zinc-800 hover:border-gold rounded-2xl p-7 text-center transition duration-500 hover:-translate-y-2"
+          >
+            <div
+              class="mx-auto mb-5 w-20 h-20 rounded-full border border-gold flex items-center justify-center group-hover:bg-gold transition duration-500"
+            >
+              <span class="text-gold group-hover:text-black text-3xl transition"
+                >◷</span
+              >
+            </div>
+            <p class="text-gold uppercase tracking-widest text-sm mb-3">
+              Jam Operasional
+            </p>
+            <p class="text-gray-400 text-sm mb-5">Kami siap melayani Anda</p>
+            <div
+              class="border border-zinc-700 group-hover:border-gold rounded-lg py-3 transition"
+            >
+              <p class="text-white text-sm">
+                Senin - Minggu<br />09.00 - 21.00 WIB
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOOGLE MAPS -->
+        <div
+          class="grid lg:grid-cols-5 bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden"
+        >
+          <div class="lg:col-span-2 p-8 md:p-10 flex flex-col justify-center">
+            <p class="text-gold uppercase tracking-[0.3em] text-sm mb-4">
+              Lokasi Kami
+            </p>
+            <h3 class="font-luxury text-4xl md:text-5xl mb-5">
+              Temukan Kami
+              <span class="block text-gold italic">di Google Maps</span>
+            </h3>
+            <div class="w-16 h-px bg-gold mb-6"></div>
+            <p class="text-gray-400 leading-relaxed text-sm mb-8">
+              Kunjungi LUXORA JEWELS dan temukan koleksi perhiasan eksklusif
+              yang akan membuat setiap momen Anda lebih berharga.
+            </p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Medan,Sumatera+Utara"
+              target="_blank"
+              class="gold-button inline-flex items-center justify-center gap-3 border border-gold text-gold hover:bg-gold hover:text-black px-6 py-3 rounded-lg font-semibold text-sm transition w-fit"
+            >
+              <span>📍</span> LIHAT RUTE
+            </a>
+          </div>
+
+          <div class="lg:col-span-3 h-[400px] lg:h-[500px]">
+            <iframe
+              src="https://www.google.com/maps?q=Medan,Sumatera%20Utara&output=embed"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </div>
+
+        <!-- SOCIAL MEDIA -->
+        <div class="mt-14 text-center">
+          <div class="flex items-center justify-center gap-5 mb-7">
+            <div class="w-20 h-px bg-zinc-800"></div>
+            <p class="text-gold uppercase tracking-[0.4em] text-sm">
+              Ikuti Kami
+            </p>
+            <div class="w-20 h-px bg-zinc-800"></div>
+          </div>
+
+          <div class="flex justify-center gap-4">
+            <a
+              href="#"
+              class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold hover:bg-gold hover:text-black transition"
+              >◎</a
+            >
+            <a
+              href="#"
+              class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold hover:bg-gold hover:text-black transition"
+              >f</a
+            >
+            <a
+              href="#"
+              class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold hover:bg-gold hover:text-black transition"
+              >♪</a
+            >
+            <a
+              href="https://wa.me/6281263516919"
+              target="_blank"
+              class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold hover:bg-gold hover:text-black transition"
+              >☎</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer
+      class="bg-black py-6 border-t border-zinc-900 text-center text-gray-500 text-xs"
+    >
+      <p>&copy; 2026 LUXORA JEWELS. All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPT UNTUK MOBILE MENU -->
+    <script>
+      const menuButton = document.getElementById("menuButton");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+    </script>
+  </body>
+</html>
